@@ -1,0 +1,23 @@
+//  https://www.codingninjas.com/codestudio/problems/sort-0-1-2_631055?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+void sort012(int *arr, int n)
+{
+   
+    int l =-1,m=0,r=n-1;
+    
+    while(m<=r){
+        if(arr[m]==0){
+            l++;
+            swap(arr[l],arr[m]);
+            m++;
+        }else if(arr[m]==1){
+            m++;
+        }else{
+            swap(arr[m],arr[r]);
+            r--;
+        }
+    }
+    
+    
+    
+}
