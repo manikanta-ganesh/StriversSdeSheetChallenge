@@ -1,0 +1,25 @@
+// https://www.codingninjas.com/codestudio/problems/pascal-s-triangle_1089580?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+vector<vector<long long int>> printPascal(int n) 
+{
+  
+    vector<vector<long long int>> ans;
+    ans.push_back({1});
+    
+    
+    
+    for(int i=1;i<n;i++){
+        vector<long long int> res;
+        res.push_back(1);
+        for(int j=1;j<ans[i-1].size();j++){
+            res.push_back(ans[i-1][j-1]+ans[i-1][j]);
+        }
+        res.push_back(1);
+        ans.push_back(res);
+    }
+    
+    return ans;
+    
+    
+    
+}
