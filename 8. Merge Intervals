@@ -1,0 +1,26 @@
+//https://www.codingninjas.com/codestudio/problems/merge-intervals_699917?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+vector<vector<int>> mergeIntervals(vector<vector<int>> &arr)
+{
+    
+    sort(arr.begin(),arr.end());
+    
+    vector<vector<int>> ans;
+    
+    int st = arr[0][0];
+    int en = arr[0][1];
+    for(int i=1;i<arr.size();i++){
+        if(en>=arr[i][0]){
+            en = max(en,arr[i][1]);
+        }else{
+            ans.push_back({st,en});
+            st = arr[i][0];
+            en = arr[i][1];
+        }
+    }
+    ans.push_back({st,en});
+    
+    return ans;
+    
+    
+}
