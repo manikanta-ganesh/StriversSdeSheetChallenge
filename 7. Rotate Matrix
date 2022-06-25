@@ -1,0 +1,43 @@
+// https://www.codingninjas.com/codestudio/problems/rotate-matrix_981260?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+void rotateMatrix(vector<vector<int>> &mat, int n, int m)
+{
+    // Write your code here
+    
+    int cs=0,ce=m-1,rs=0,re=n-1;
+    
+    while(cs<ce && rs<re){
+        int temp = mat[rs][cs];
+        for(int i=cs+1;i<=ce;i++){
+            int t = mat[rs][i];
+            mat[rs][i] = temp;
+            temp = t;
+        }
+        
+        for(int i=rs+1;i<=re;i++){
+            int t = mat[i][ce];
+            mat[i][ce] = temp;
+            temp = t;
+        }
+        
+        for(int i=ce-1;i>=cs;i--){
+             int t = mat[re][i];
+            mat[re][i] = temp;
+            temp = t;
+        }
+        
+        for(int i=re-1;i>=rs;i--){
+            int t = mat[i][cs];
+            mat[i][cs] = temp;
+            temp = t;
+        }
+        
+        rs++;cs++;
+        re--;ce--;
+        
+        
+    }
+    
+    
+
+}
