@@ -1,0 +1,50 @@
+// https://www.codingninjas.com/codestudio/problems/add-two-numbers-as-linked-lists_1170520?topList=striver-sde-sheet-problems&leftPanelTab=0
+#include <bits/stdc++.h> 
+
+
+Node *addTwoNumbers(Node *head1, Node *head2)
+{
+    // Write your code here.
+    
+    int c =0;
+    Node* ans = new Node(-1),*temp = ans;
+    
+    while(head1!=NULL && head2!=NULL){
+        int s = c+head1->data+head2->data;
+        Node* x = new Node(s%10);
+        c = s/10;
+        temp->next = x;
+        temp = temp->next;
+        head1 = head1->next;
+        head2 = head2->next;
+    }
+    
+    while(head1!=NULL){
+        int s = c+head1->data;
+        Node* x = new Node(s%10);
+        c = s/10;
+        temp->next = x;
+        temp = temp->next;
+         head1 = head1->next;
+        
+    }
+    
+    while(head2!=NULL){
+        int s = c+head2->data;
+        Node* x = new Node(s%10);
+        c = s/10;
+        temp->next = x;
+        temp = temp->next;
+        head2 = head2->next;
+    }
+    
+    if(c){
+        Node* x = new Node(c);
+        temp->next = x;
+        temp = temp->next;
+    }
+    
+    
+    return ans->next;
+    
+}
