@@ -1,0 +1,13 @@
+// https://www.codingninjas.com/codestudio/problems/delete-node-in-a-linked-list_1105578?topList=striver-sde-sheet-problems&leftPanelTab=0
+#include <bits/stdc++.h> 
+
+
+void deleteNode(LinkedListNode<int> * node) {
+    // Write your code here.
+    
+    LinkedListNode<int> *nxt = node->next;
+    node->data = nxt->data;
+    node->next = nxt->next;
+    
+    
+}
