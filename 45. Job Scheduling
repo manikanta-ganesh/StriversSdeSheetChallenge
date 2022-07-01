@@ -1,0 +1,29 @@
+    static bool comp(Job a, Job b){
+        if(a.profit==b.profit) return a.dead>b.dead;
+        return a.profit>b.profit;
+    }
+    
+    vector<int> JobScheduling(Job arr[], int n) 
+    { 
+        // your code here
+        
+        sort(arr,arr+n,comp);
+        int p =0,c=0;
+        vector<int> ans(n,-1);
+        
+        for(int i=0;i<n;i++){
+            int j = arr[i].dead-1;
+            while(j>=0 && ans[j]!=-1){
+                j--;
+            }
+            if(j>=0){
+                p+=arr[i].profit;
+                ans[j]=arr[i].id;
+                c++;
+            }
+            
+        }
+        
+        return {c,p};
+        
+    }
