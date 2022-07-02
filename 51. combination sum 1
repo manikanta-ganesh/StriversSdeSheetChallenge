@@ -1,0 +1,37 @@
+class Solution {
+public:
+    
+    void helper(int i,vector<int> &cand, vector<int> ds, int t,vector<vector<int>> &ans){
+        
+        if(t==0){
+            ans.push_back(ds);
+            return;
+        }
+        if(t<0 || i>=cand.size()) return;
+        
+        if(t>=cand[i]){
+            ds.push_back(cand[i]);
+            helper(i,cand,ds,t-cand[i],ans);
+            //helper(i+1,cand,ds,t-cand[i],ans);
+            ds.pop_back();
+        }
+        helper(i+1,cand,ds,t,ans);
+        
+        
+    }
+    
+    vector<vector<int>> combinationSum(vector<int>& cand, int t) {
+        
+        vector<vector<int>> ans;
+        
+        vector<int> ds;
+        
+        sort(cand.begin(),cand.end());
+        
+        helper(0,cand,ds,t,ans);
+        
+        return ans;
+        
+        
+    }
+};
