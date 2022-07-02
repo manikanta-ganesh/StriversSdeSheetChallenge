@@ -1,0 +1,32 @@
+// https://www.codingninjas.com/codestudio/problems/unique-subsets_3625236?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+#include<bits/stdc++.h>
+
+void helper(vector<int> &arr, int i, vector<int> res, set<vector<int>> &st){
+    if(i>=arr.size()){
+        sort(res.begin(),res.end());
+        st.insert(res);
+        return;
+    }
+    
+    helper(arr,i+1,res,st);
+    res.push_back(arr[i]);
+    helper(arr,i+1,res,st);
+    res.pop_back();
+    
+    
+}
+
+vector<vector<int>> uniqueSubsets(int n, vector<int> &arr)
+{
+    // Write your code here.
+    
+    vector<vector<int>> ans;
+    set<vector<int>> st;
+    vector<int> res;
+    helper(arr,0,res,st);
+    
+    for(auto v : st) ans.push_back(v);
+    sort(ans.begin(),ans.end());
+    return ans;
+}
