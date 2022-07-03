@@ -1,0 +1,72 @@
+// https://www.codingninjas.com/codestudio/problems/n-queens_759332?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+bool isSafe(int i, int j, int n,vector<vector<int>> &chess){
+        
+        if(i<0 || j<0 || i>=n || j>=n || chess[i][j]==1) return false;
+        
+        int a = i-1;
+        while(a>=0){
+            if(chess[a][j]) return false;
+            a--;
+        }
+        a=j-1;
+        while(a>=0){
+            if(chess[i][a]) return false;
+            a--;
+        }
+        a =i-1;
+        int b = j-1;
+        while(a>=0 && b>=0){
+            if(chess[a][b]) return false;
+            a--;
+            b--;
+        }
+        a=i-1;
+        b=j+1;
+        while(a>=0 && b<n){
+            if(chess[a][b]) return false;
+            a--;
+            b++;
+        }
+        
+        return true;
+    }
+    
+    
+    void helper(int i, int n, vector<vector<int>> &chess,vector<int> &temp, vector<vector<int>> &ans){
+        if(i==n){
+            ans.push_back(temp);
+            return;
+        }
+        
+        
+        vector<int> line(n,0);
+        
+        for(int j=0;j<n;j++){
+            if(isSafe(i,j,n,chess)){
+                line[j]=1;
+                chess[i][j]=1;
+                for(auto k : line) temp.push_back(k);
+                helper(i+1,n,chess,temp,ans);
+               for(int k=0;k<n;k++) temp.pop_back();
+                chess[i][j]=0;
+                line[j]=0;
+            }
+        }
+        
+    }
+    
+    vector<vector<int>> solveNQueens(int n) {
+        
+        vector<vector<int>> ans;
+        
+        vector<vector<int>> chess(n+1,vector<int>(n+1,0));
+        vector<int> temp;
+        helper(0,n,chess,temp,ans);
+        
+        return ans;
+        
+        
+        
+        
+    }
