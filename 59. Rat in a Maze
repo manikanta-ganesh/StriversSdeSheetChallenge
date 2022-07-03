@@ -1,0 +1,34 @@
+class Solution{
+    public:
+    
+    void helper(int i, int j, vector<vector<int>> &m, int n,string temp, vector<string> &ans){
+        if(i<0 || j<0 || i>=n || j>=n || m[i][j]==0) return;
+        
+        if(i==n-1 && j==n-1 && m[i][j]){
+            ans.push_back(temp);
+            return;
+        }
+        
+        m[i][j]=0;
+        helper(i-1,j,m,n,temp+"U",ans);
+        helper(i+1,j,m,n,temp+"D",ans);
+        helper(i,j-1,m,n,temp+"L",ans);
+        helper(i,j+1,m,n,temp+"R",ans);
+        m[i][j]=1;
+        
+    }
+    
+    vector<string> findPath(vector<vector<int>> &m, int n) {
+        // Your code goes here
+        vector<string> ans;
+        
+        helper(0,0,m,n,"",ans);
+        
+        sort(ans.begin(),ans.end());
+        
+        return ans;
+        
+    }
+};
+
+    
