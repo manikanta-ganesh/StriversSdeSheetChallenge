@@ -1,0 +1,47 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& b) {
+        
+        for(int i=0;i<9;i++){
+            vector<bool> vis(11,false);
+            for(int j=0;j<9;j++){
+                if(b[i][j]=='.') continue;
+                if(vis[b[i][j]-'0']) return false;
+                vis[b[i][j]-'0']  = 1;
+            }
+        }
+        
+        for(int i=0;i<9;i++){
+            vector<bool> vis(11,false);
+            for(int j=0;j<9;j++){
+                if(b[j][i]=='.') continue;
+                if(vis[b[j][i]-'0']) return false;
+                vis[b[j][i]-'0']  = 1;
+            }
+        }
+        
+        int a = 0;
+        int l = 0;
+        int k = 9;
+        while(k--){
+            vector<bool> vis(11,false);
+            for(int i = a; i<a+3;i++){
+                for(int j = l;j<l+3;j++){
+                    if(b[i][j]=='.') continue;
+                    if(vis[b[i][j]-'0']) return false;
+                    vis[b[i][j]-'0']  = 1;
+                }
+            }
+            if(a==6){
+                a=0;
+                l+=3;
+            }else{
+                a+=3;
+            }
+            
+        }
+        
+        return true;
+        
+    }
+};
