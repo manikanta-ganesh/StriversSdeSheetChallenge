@@ -1,0 +1,42 @@
+// https://www.codingninjas.com/codestudio/problems/word-break-ii_983635?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+#include<bits/stdc++.h>
+
+vector<string> wordBreak(string &s, vector<string> &dict)
+{
+    // Write your code here
+    int m = s.size();
+        
+        vector<vector<string>> dp(m+1);
+        
+        dp[0] = {"x"};
+        vector<string> ans;
+        
+        set<string> st;
+        for(auto v: dict) st.insert(v);
+        
+        for(int i=1;i<=m;i++){
+            for(int j=i-1;j>=0;j--){
+                if(dp[j].size()!=0){
+                    string x = s.substr(j,i-j);
+                    if(st.find(x)!=st.end()){
+                        vector<string> v = dp[j];
+                        for(auto k : v){
+                            dp[i].push_back(k+" "+x);
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+        
+        for(int i =0;i<dp[m].size();i++){
+            dp[m][i] = dp[m][i].substr(2);
+        }
+        
+        
+        return dp[m];
+        
+
+}
