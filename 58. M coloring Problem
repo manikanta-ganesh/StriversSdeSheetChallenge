@@ -1,0 +1,35 @@
+// https://www.codingninjas.com/codestudio/problems/m-coloring-problem_981273?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+bool pos(int i, int col, vector<int> &color, vector<vector<int>> &mat,int V){
+    for(int j=0;j<V;j++){
+        if(mat[i][j] && color[j]==col) return false;
+    }
+    return true;
+}
+
+bool helper(int i, vector<vector<int>> &mat,int m, int V, vector<int> color){
+    if(i==V) return true;
+    
+    for(int j=1;j<=m;j++){
+        if(pos(i,j,color,mat,V)){
+            color[i]=j;
+            if(helper(i+1,mat,m,V,color)) return true;
+            color[i]=0;
+        }
+    }
+    
+    return false;
+    
+}
+
+
+
+
+string graphColoring(vector<vector<int>> &mat, int m) {
+    // Write your code here
+    int V = mat.size();
+    vector<int> color(V,0);
+    if(helper(0,mat,m,V,color)) return "YES";
+    return "NO";
+    
+}
