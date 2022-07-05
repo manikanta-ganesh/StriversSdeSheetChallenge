@@ -1,0 +1,38 @@
+// https://www.codingninjas.com/codestudio/problems/985294?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
+
+double median(vector<int> a, vector<int> b)
+{
+    
+    int m = b.size();
+    int n = a.size();
+    int i = 0; 
+    int j = 0; 
+    int c; 
+    int m1 = -1, m2 = -1; 
+    
+    for (c = 0; c <= (m + n)/2.0; c++)
+    { 
+        
+        m2=m1;
+        if(i != n && j != m)
+        { 
+            m1 = (a[i] > b[j]) ? b[j++] : a[i++]; 
+        } 
+        else if(i < n)
+        { 
+            m1 = a[i++]; 
+        } 
+
+        else
+        { 
+            m1 = b[j++]; 
+        } 
+    } 
+
+    if((m + n) % 2 == 1){
+        return m1; 
+    }
+    else{
+        return (m1+m2)/2.0;
+    } 
+}
