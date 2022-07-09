@@ -1,0 +1,53 @@
+// https://www.codingninjas.com/codestudio/problems/rotting-oranges_701655?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+#include<bits/stdc++.h>
+
+int minTimeToRot(vector<vector<int>>& grid, int n, int m)
+{
+    // Write your code here. 
+    
+    queue<vector<int>> q;
+    int c =0;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(grid[i][j]==2){
+                q.push({i,j});
+                grid[i][j] = 0;
+            }
+            if(grid[i][j]==1) c++;
+        }
+    }
+    if(q.empty() && c==0) return 0;
+    if(q.empty() && c!=0) return -1;
+    int l =0;
+    vector<int> xd = {1,0,-1,0};
+    vector<int> yd = {0,1,0,-1};
+    while(!q.empty()){
+        l++;
+        int u = q.size();
+        for(int t=0;t<u;t++){
+            auto p = q.front();
+            q.pop();
+            int i = p[0],j=p[1];
+           // cout<<i<<" "<<j<<endl;
+            for(int k=0;k<4;k++){
+                int x = i+xd[k];
+                int y = j+yd[k];
+                if(x>=0 && y>=0 && x<n && y<m && grid[x][y]==1){
+                    grid[x][y] = 0;
+                    q.push({x,y});
+                }
+            }
+        }
+    }
+    
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(grid[i][j]==1) return -1;
+        }
+    }
+    
+    return l-1;
+    
+    
+}
