@@ -1,0 +1,29 @@
+// https://www.codingninjas.com/codestudio/problems/longest-palindromic-substring_758900?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+void helper(string &str, int i, int j, int n, int &idx, int &l){
+    while(i>=0 && j<n && str[i]==str[j]){
+        int len = j-i+1;
+        if(len>l){
+            l = len;
+            idx = i;
+        }
+        j++;i--;
+    }
+}
+
+
+string longestPalinSubstring(string str)
+{
+    // Write your code here.
+    
+    int idx = -1,l=0;
+    int n = str.size();
+    for(int i=0;i<str.size();i++){
+        helper(str,i,i,n,idx,l);
+        helper(str,i,i+1,n,idx,l);
+    }
+    
+    return str.substr(idx,l);
+    
+    
+}
