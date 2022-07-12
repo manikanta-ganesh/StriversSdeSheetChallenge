@@ -1,0 +1,24 @@
+// https://www.codingninjas.com/codestudio/problems/longest-common-prefix_2090383?topList=striver-sde-sheet-problems&leftPanelTab=0
+
+string longestCommonPrefix(vector<string> &strs, int n)
+{
+    string ans = strs[0];
+        
+        for(int i=1;i<strs.size();i++){
+            string s = strs[i];
+            
+            int j =0;
+             while(j<s.size() && j<ans.size()){
+                 if(s[j]!=ans[j]){
+                   ans.erase(j);
+                     break;
+                 } 
+                 j++;
+             }
+            ans.erase(j);
+            // if(ans=="") return ans;
+        }
+        return ans;
+}
+
+
